@@ -12,6 +12,7 @@ import { DynamicParallel } from "./components/DynamicParallel";
 import { DependentQueries } from "./components/DependentQueries";
 import { PaginatedQueries } from "./components/PaginatedQueries";
 import { InfiniteQueries } from "./components/InfiniteQueries";
+import { ErrorBoundary } from "./components/ErrorBoundary";
 
 import "./App.css";
 
@@ -49,7 +50,14 @@ function App() {
               element={<DynamicParallel heroIds={[1, 3]} />}
             />
             <Route path="/super-heroes" element={<SuperHeroes />} />
-            <Route path="/rq-super-heroes" element={<RQSuperHeroes />} />
+            <Route
+              path="/rq-super-heroes"
+              element={
+                <ErrorBoundary>
+                  <RQSuperHeroes />
+                </ErrorBoundary>
+              }
+            />
             <Route
               path="/rq-super-heroes/:heroId"
               element={<RQHeroDetails />}
